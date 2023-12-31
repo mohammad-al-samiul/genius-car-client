@@ -7,7 +7,7 @@ import image5 from "../../../assets/images/banner/5";
 import image6 from "../../../assets/images/banner/6";
 const Banner = () => {
   return (
-    <div className="carousel w-[80%] rounded-lg">
+    <div className="carousel mx-2 lg:w-[80%] rounded-lg">
       <BannerItem
         image={image1}
         slideId={"slide1"}
