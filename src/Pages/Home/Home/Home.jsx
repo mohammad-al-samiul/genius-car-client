@@ -4,7 +4,9 @@ const Home = () => {
   return (
     <div>
       <div className="mt-10">
-        <Banner />
+        <div className="w-full flex justify-center">
+          <Banner />
+        </div>
       </div>
     </div>
   );

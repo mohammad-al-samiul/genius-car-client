@@ -7,12 +7,13 @@ import image5 from "../../../assets/images/banner/5";
 import image6 from "../../../assets/images/banner/6";
 const Banner = () => {
   return (
-    <div className="carousel w-full rounded-lg">
+    <div className="carousel w-[80%] rounded-lg">
       <BannerItem
         image={image1}
         slideId={"slide1"}
         leftSlide={`#slide6`}
         rightSlide={`#slide2`}
+        
       />
       <BannerItem
         image={image2}
