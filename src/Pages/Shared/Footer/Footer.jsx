@@ -10,18 +10,34 @@ const Footer = () => {
           trainer who is also a serial .
         </p>
         <div className="flex gap-x-3">
-        <a target="_blank" href="">
-          <FaFacebook className="text-2xl" />
-        </a>
-        <a target="_blank" href="">
-          <FaTwitter className="text-2xl" />
-        </a>
-        <a target="_blank" href="">
-          <FaLinkedin className="text-2xl" />
-        </a>
-        <a target="_blank" href="">
-          <FaGithub className="text-2xl" />
-        </a> 
+          <a
+            target="_blank"
+            href="https://www.facebook.com/alsamiul11"
+            rel="noreferrer"
+          >
+            <FaFacebook className="text-2xl" />
+          </a>
+          <a
+            target="_blank"
+            href="https://twitter.com/al_samiul_404"
+            rel="noreferrer"
+          >
+            <FaTwitter className="text-2xl" />
+          </a>
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/al-samiul/"
+            rel="noreferrer"
+          >
+            <FaLinkedin className="text-2xl" />
+          </a>
+          <a
+            target="_blank"
+            href="https://github.com/mohammad-al-samiul"
+            rel="noreferrer"
+          >
+            <FaGithub className="text-2xl" />
+          </a>
         </div>
       </aside>
       <nav>
