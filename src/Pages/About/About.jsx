@@ -3,16 +3,16 @@ import parts from "../../assets/images/about_us/parts";
 import person from "../../assets/images/about_us/person";
 const About = () => {
   return (
-    <div className="hero h-[600px]">
+    <div className="hero lg:h-[600px]">
       <div className="p-0 hero-content flex-col lg:flex-row !justify-between">
-        <div className="w-1/2 relative px-5">
-          <img src={person} className="w-9/12 rounded-lg shadow-2xl" />
+        <div className="lg:w-1/2 relative px-5">
+          <img src={person} className="lg:w-9/12 rounded-lg shadow-2xl" />
           <img
             src={parts}
-            className="max-w-sm rounded-lg shadow-2xl absolute right-5 top-1/2"
+            className="hidden lg:block lg:max-w-sm rounded-lg shadow-2xl absolute right-5 top-1/2 border-8 border-white"
           />
         </div>
-        <div className="w-1/2  flex items-center px-5">
+        <div className="lg:w-1/2  px-5">
           <div>
             <h3 className="text-red-500 text-xl">About</h3>
             <h1 className="text-3xl font-bold">
