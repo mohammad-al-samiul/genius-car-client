@@ -1,12 +1,28 @@
+import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import logo from "../../../assets/logo";
 const Footer = () => {
   return (
     <footer className="footer p-10 bg-slate-700 text-white mt-10">
       <aside>
-       <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" />
         <p className="lg:w-72">
-        Edwin Diaz is a software and web technologies engineer, a life coach trainer who is also a serial .
+          Edwin Diaz is a software and web technologies engineer, a life coach
+          trainer who is also a serial .
         </p>
+        <div className="flex gap-x-3">
+        <a target="_blank" href="">
+          <FaFacebook className="text-2xl" />
+        </a>
+        <a target="_blank" href="">
+          <FaTwitter className="text-2xl" />
+        </a>
+        <a target="_blank" href="">
+          <FaLinkedin className="text-2xl" />
+        </a>
+        <a target="_blank" href="">
+          <FaGithub className="text-2xl" />
+        </a> 
+        </div>
       </aside>
       <nav>
         <header className="footer-title">Services</header>
