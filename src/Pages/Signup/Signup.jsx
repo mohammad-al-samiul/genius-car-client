@@ -2,9 +2,10 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import signupImage from "../../assets/images/login/login";
+
 const Signup = () => {
   const { googleSignIn, createUser, githubSignIn } = useContext(AuthContext);
 
@@ -14,6 +15,8 @@ const Signup = () => {
         const user = result.user;
         console.log(user);
         toast.success("successfully created user");
+        <Navigate to={'/home'} />
+        
       })
       .catch((err) => {
         console.error(err.message);
@@ -21,11 +24,12 @@ const Signup = () => {
       });
   };
   const handleGithubSignUp = () => {
-    handleGithubSignUp()
+    githubSignIn()
       .then((result) => {
         const user = result.user;
         console.log(user);
         toast.success("successfully created user");
+        <Navigate to={'/home'} />
       })
       .catch((err) => {
         console.log(err.message);
@@ -38,8 +42,19 @@ const Signup = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const user = { email, name, password };
-    console.log(user);
+
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("user created successfully");
+        form.reset();
+        <Navigate to={'/home'} />
+      })
+      .catch((err) => {
+        console.error(err.message);
+        toast.error(err.message);
+      });
   };
   return (
     <div className="hero min-h-screen">

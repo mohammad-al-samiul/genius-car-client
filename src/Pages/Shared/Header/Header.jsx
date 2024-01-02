@@ -1,9 +1,16 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, NavLink, Navigate } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import logo from "../../../assets/logo";
 const Header = () => {
-  const {user} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    logOut().then(() => {
+      toast.success("log out successful");
+      <Navigate to={'/home'} />
+    });
+  };
   const listItems = (
     <>
       <li>
@@ -21,20 +28,27 @@ const Header = () => {
       <li>
         <NavLink to={"/contact"}> Contact</NavLink>
       </li>
-      {
-        user && user?.id ? <>
-       <li>
-        <button className="btn btn-sm" to={"/login"}> Log out</button>
-      </li>
-        </> : <>
-        <li>
-        <NavLink to={"/login"}> Login</NavLink>
-      </li>
-        <li>
-        <NavLink to={"/signup"}> Signup</NavLink>
-      </li>
-         </>
-      }
+      {user && user?.uid ? (
+        <>
+          <button
+            onClick={handleLogout}
+            className="mt-1 btn btn-sm btn-ghost"
+            to={"/login"}
+          >
+            {" "}
+            Log out
+          </button>
+        </>
+      ) : (
+        <>
+          <li>
+            <NavLink to={"/login"}> Login</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/signup"}> Signup</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -73,7 +87,9 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{listItems}</ul>
         </div>
         <div className="navbar-end">
-        <button className="btn btn-outline btn-error ! hover:text-white">Appointment</button>
+          <button className="btn btn-outline btn-error ! hover:text-white">
+            Appointment
+          </button>
         </div>
       </div>
     </>
