@@ -1,7 +1,61 @@
-import { FaFacebook, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import toast from "react-hot-toast";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 import loginImage from "../../assets/images/login/login";
 const Login = () => {
+  const {signInUser,googleSignIn, githubSignIn} = useContext(AuthContext);
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("successfully created user");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.error(err.message);
+        toast.error(err.message);
+      });
+  };
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("successfully created user");
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(err.message);
+      });
+  };
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    signInUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("user created successfully");
+        form.reset();
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.error(err.message);
+        toast.error(err.message);
+      });
+  };
   return (
     <div className="hero min-h-screen">
       <div className="hero-content flex-col lg:flex-row">
@@ -10,13 +64,14 @@ const Login = () => {
         </div>
         <div className="card w-full max-w-sm border border-slate-300 py-6">
           <h1 className="text-center text-2xl font-bold">Login</h1>
-          <form className="pb-0 card-body">
+          <form onSubmit={handleSignIn} className="pb-0 card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="email"
                 className="input input-bordered"
                 required
@@ -28,6 +83,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                name="password"
                 placeholder="password"
                 className="input input-bordered"
                 required
@@ -51,10 +107,10 @@ const Login = () => {
             <br />
           </label>
           <div className="flex justify-center gap-x-3 mb-3 text-red-400">
-            <span>
-              <FaFacebook className="text-2xl cursor-pointer" />
+            <span onClick={handleGithubSignIn}>
+              <FaGithub className="text-2xl cursor-pointer" />
             </span>
-            <span>
+            <span onClick={handleGoogleLogin}>
               <FaGoogle className="text-2xl cursor-pointer" />
             </span>
           </div>
