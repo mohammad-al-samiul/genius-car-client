@@ -1,7 +1,46 @@
-import { FaFacebook, FaGoogle } from "react-icons/fa";
+/* eslint-disable no-unused-vars */
+import { useContext } from "react";
+import toast from "react-hot-toast";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 import signupImage from "../../assets/images/login/login";
 const Signup = () => {
+  const { googleSignIn, createUser, githubSignIn } = useContext(AuthContext);
+
+  const handleGoogleSignUp = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("successfully created user");
+      })
+      .catch((err) => {
+        console.error(err.message);
+        toast.error(err.message);
+      });
+  };
+  const handleGithubSignUp = () => {
+    handleGithubSignUp()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success("successfully created user");
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(err.message);
+      });
+  };
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const user = { email, name, password };
+    console.log(user);
+  };
   return (
     <div className="hero min-h-screen">
       <div className="hero-content flex-col lg:flex-row">
@@ -10,13 +49,14 @@ const Signup = () => {
         </div>
         <div className="card w-full max-w-sm border border-slate-300 py-6">
           <h1 className="text-center text-2xl font-bold">Sign Up</h1>
-          <form className="card-body pb-0">
+          <form onSubmit={handleSignUp} className="card-body pb-0">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
                 type="text"
+                name="name"
                 placeholder="Enter your name"
                 className="input input-bordered"
                 required
@@ -28,6 +68,7 @@ const Signup = () => {
               </label>
               <input
                 type="email"
+                name="email"
                 placeholder="email"
                 className="input input-bordered"
                 required
@@ -39,8 +80,10 @@ const Signup = () => {
               </label>
               <input
                 type="password"
+                name="password"
+                autoComplete="on"
                 placeholder="password"
-                className="input input-bordered"
+                className="input input-bordered "
                 required
               />
             </div>
@@ -57,10 +100,10 @@ const Signup = () => {
             <br />
           </label>
           <div className="flex justify-center gap-x-3 mb-3 text-red-400">
-            <span>
-              <FaFacebook className="text-2xl cursor-pointer" />
+            <span onClick={handleGithubSignUp}>
+              <FaGithub className="text-2xl cursor-pointer" />
             </span>
-            <span>
+            <span onClick={handleGoogleSignUp}>
               <FaGoogle className="text-2xl cursor-pointer" />
             </span>
           </div>
