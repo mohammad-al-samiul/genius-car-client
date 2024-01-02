@@ -17,7 +17,6 @@ module.exports = {
     "no-empty": "error",
     "default-case": "error",
     eqeqeq: "error",
-   
     "max-depth": ["error", 3],
   },
 };

@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 import logo from "../../../assets/logo";
 const Header = () => {
+  const {user} = useContext(AuthContext);
   const listItems = (
     <>
       <li>
@@ -18,6 +21,20 @@ const Header = () => {
       <li>
         <NavLink to={"/contact"}> Contact</NavLink>
       </li>
+      {
+        user && user?.id ? <>
+       <li>
+        <button className="btn btn-sm" to={"/login"}> Log out</button>
+      </li>
+        </> : <>
+        <li>
+        <NavLink to={"/login"}> Login</NavLink>
+      </li>
+        <li>
+        <NavLink to={"/signup"}> Signup</NavLink>
+      </li>
+         </>
+      }
     </>
   );
   return (

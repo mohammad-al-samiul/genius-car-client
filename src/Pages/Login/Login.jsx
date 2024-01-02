@@ -38,7 +38,7 @@ const Login = () => {
                 </a>
               </label>
             </div>
-            <div className="form-control mt-6">
+            <div className="form-control">
               <input
                 className="btn btn-error ! hover:text-white text-white"
                 type="submit"
