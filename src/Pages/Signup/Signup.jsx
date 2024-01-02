@@ -2,12 +2,16 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import signupImage from "../../assets/images/login/login";
 
 const Signup = () => {
   const { googleSignIn, createUser, githubSignIn } = useContext(AuthContext);
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
 
   const handleGoogleSignUp = () => {
     googleSignIn()
@@ -15,8 +19,7 @@ const Signup = () => {
         const user = result.user;
         console.log(user);
         toast.success("successfully created user");
-        <Navigate to={'/home'} />
-        
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.error(err.message);
@@ -29,7 +32,7 @@ const Signup = () => {
         const user = result.user;
         console.log(user);
         toast.success("successfully created user");
-        <Navigate to={'/home'} />
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err.message);
@@ -49,7 +52,7 @@ const Signup = () => {
         console.log(user);
         toast.success("user created successfully");
         form.reset();
-        <Navigate to={'/home'} />
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.error(err.message);
