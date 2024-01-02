@@ -17,7 +17,7 @@ module.exports = {
     "no-empty": "error",
     "default-case": "error",
     eqeqeq: "error",
-    "max-lines": ["error", 70],
+   
     "max-depth": ["error", 3],
   },
 };

@@ -7,7 +7,7 @@ const Login = () => {
           <img src={loginImage} alt="" />
         </div>
         <div className="card w-full max-w-sm border border-slate-300 py-6">
-            <h1 className="text-center text-2xl font-bold">Login</h1>
+          <h1 className="text-center text-2xl font-bold">Login</h1>
           <form className="card-body">
             <div className="form-control">
               <label className="label">
@@ -37,7 +37,11 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <input className="btn btn-error ! hover:text-white text-white" type="submit" value="Login" />
+              <input
+                className="btn btn-error ! hover:text-white text-white"
+                type="submit"
+                value="Login"
+              />
             </div>
           </form>
         </div>
