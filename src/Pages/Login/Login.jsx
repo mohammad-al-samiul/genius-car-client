@@ -84,6 +84,7 @@ const Login = () => {
               <input
                 type="password"
                 name="password"
+                autoComplete="on"
                 placeholder="password"
                 className="input input-bordered"
                 required

@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main/Main";
 import About from "../Pages/About/About";
 import Blog from "../Pages/Blog/Blog";
-import Checkout from "../Pages/Checkout/Checkout";
+import Booking from "../Pages/Booking/Booking";
 import Contact from "../Pages/Contact/Contact";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout/:id",
-        element: <Checkout />,
+        element: <Booking />,
         loader: ({ params }) =>
           fetch(`http://localhost:8000/api/services/${params.id}`),
       },
