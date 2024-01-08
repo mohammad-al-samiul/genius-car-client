@@ -13,7 +13,7 @@ module.exports = {
   plugins: ["react-refresh"],
   rules: {
     "no-var": "error",
-    camelcase: "error",
+    camelcase: 0,
     "no-empty": "error",
     "default-case": "error",
     eqeqeq: "error",

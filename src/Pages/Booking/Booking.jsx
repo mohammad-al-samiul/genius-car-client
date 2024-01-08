@@ -1,27 +1,51 @@
+import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Booking = () => {
+  const { user } = useContext(AuthContext);
   const service = useLoaderData();
-  console.log(service);
-  const { title } = service;
+  const { _id, title, price, img } = service;
+
+  const handleBooking = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const date = form.date.value;
+    const name = form.name.value;
+    const email = user?.email;
+    const message = form.message.value;
+    const order = {
+      user_name: name,
+      service_id: _id,
+      service_name: title,
+      email,
+      img,
+      price,
+      date,
+      description: message,
+    };
+    console.log(order);
+  };
+
   return (
     <div className="bg-base-200 p-20 rounded-lg mt-10">
-      <form className="card-body space-y-3 ">
+      <form onSubmit={handleBooking} className="card-body space-y-3 ">
         <div className="grid grid-cols-2 gap-4">
           <div className="form-control">
             <input
               type="text"
-              placeholder="First Name"
+              name="name"
+              placeholder="Enter your Name"
               className="input"
               required
             />
           </div>
           <div className="form-control">
             <input
-              type="text"
-              placeholder="Last Name"
+              type="date"
+              id="birthdaytime"
               className="input"
-              required
+              name="date"
             />
           </div>
         </div>
@@ -30,6 +54,7 @@ const Booking = () => {
             <input
               type="number"
               placeholder="Your Phone"
+              name="phone"
               className="input"
               required
             />
@@ -38,16 +63,23 @@ const Booking = () => {
             <input
               type="email"
               placeholder="Your Email"
+              name="email"
               className="input"
               required
             />
           </div>
         </div>
         <div className="form-control">
-          <textarea className="textarea h-32" placeholder="Your Message"></textarea>
+          <textarea
+            className="textarea h-32"
+            name="message"
+            placeholder="Your Message"
+          ></textarea>
         </div>
         <div className="form-control mt-6">
-          <button className="btn text-white btn-error resize">Order Confirm</button>
+          <button className="btn text-white btn-error resize">
+            Order Confirm
+          </button>
         </div>
       </form>
     </div>
