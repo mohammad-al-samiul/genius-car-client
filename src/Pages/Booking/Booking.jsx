@@ -12,19 +12,34 @@ const Booking = () => {
     const form = e.target;
     const date = form.date.value;
     const name = form.name.value;
-    const email = user?.email;
+    const email = form.email.value;
     const message = form.message.value;
     const order = {
       user_name: name,
       service_id: _id,
       service_name: title,
+
       email,
       img,
       price,
       date,
       description: message,
     };
-    console.log(order);
+    //console.log(order);
+    fetch(`http://localhost:8000/api/bookings`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   return (
