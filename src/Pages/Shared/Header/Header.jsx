@@ -8,7 +8,7 @@ const Header = () => {
   const handleLogout = () => {
     logOut().then(() => {
       toast.success("log out successful");
-      <Navigate to={'/home'} />
+      <Navigate to={"/home"} />;
     });
   };
   const listItems = (
@@ -30,12 +30,14 @@ const Header = () => {
       </li>
       {user && user?.uid ? (
         <>
+          <li>
+            <NavLink to={"/order"}> Order</NavLink>
+          </li>
           <button
             onClick={handleLogout}
             className="mt-1 btn btn-sm btn-ghost"
             to={"/login"}
           >
-            {" "}
             Log out
           </button>
         </>

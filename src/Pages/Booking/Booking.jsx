@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
@@ -12,7 +13,7 @@ const Booking = () => {
     const form = e.target;
     const date = form.date.value;
     const name = form.name.value;
-    const email = form.email.value;
+    const email = user?.email ? user?.email : form.email.value;
     const message = form.message.value;
     const order = {
       user_name: name,
@@ -35,7 +36,10 @@ const Booking = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.insertedId) {
+          form.reset();
+          toast.success("Order Confirmed! ");
+        }
       })
       .catch((err) => {
         console.log(err.message);
