@@ -21,15 +21,11 @@ const Order = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
               <th></th>
+              <th>Service Name</th>
+              <th>Price</th>
+              <th>Date</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -40,15 +36,6 @@ const Order = () => {
               ))}
           </tbody>
           {/* foot */}
-          <tfoot>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>
