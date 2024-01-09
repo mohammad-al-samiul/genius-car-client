@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
-const OrderRow = ({ booking }) => {
-  const { service_name, price, img, date } = booking;
+const OrderRow = ({ booking, handleUpdate, handleDelete }) => {
+  const { _id, service_name, price, img, date, status } = booking;
   return (
     <tr>
       <th>
         <label>
-          <button className="btn btn-neutral btn-sm btn-circle">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn btn-neutral btn-sm btn-circle"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -36,9 +39,29 @@ const OrderRow = ({ booking }) => {
         </div>
       </td>
       <td>{price}</td>
-      <td>{date}</td>
+      <td>{date?.slice(0, 10)}</td>
       <th>
-        <button className="btn btn-error text-white btn-sm">Confirm</button>
+        {status ? (
+          <>
+            <button
+              
+              onClick={() => handleUpdate(_id)}
+              className="btn bg-green-400 text-white btn-sm"
+              disabled
+            >
+              Approved
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => handleUpdate(_id)}
+              className="btn btn-error text-white btn-sm"
+            >
+              Pending
+            </button>
+          </>
+        )}
       </th>
     </tr>
   );

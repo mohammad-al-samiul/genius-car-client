@@ -11,7 +11,7 @@ const Booking = () => {
   const handleBooking = (e) => {
     e.preventDefault();
     const form = e.target;
-    const date = form.date.value;
+    const date = form.date.value.slice(0, 10);
     const name = form.name.value;
     const email = user?.email ? user?.email : form.email.value;
     const message = form.message.value;
@@ -19,11 +19,11 @@ const Booking = () => {
       user_name: name,
       service_id: _id,
       service_name: title,
-
       email,
       img,
       price,
       date,
+      status : false,
       description: message,
     };
     //console.log(order);
@@ -48,6 +48,7 @@ const Booking = () => {
 
   return (
     <div className="bg-base-200 p-20 rounded-lg mt-10">
+      
       <form onSubmit={handleBooking} className="card-body space-y-3 ">
         <div className="grid grid-cols-2 gap-4">
           <div className="form-control">
