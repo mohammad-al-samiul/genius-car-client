@@ -7,7 +7,8 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import signupImage from "../../assets/images/login/login";
 
 const Signup = () => {
-  const { googleSignIn, createUser, githubSignIn } = useContext(AuthContext);
+  const { googleSignIn, createUser, githubSignIn, profileUpdate } =
+    useContext(AuthContext);
   let navigate = useNavigate();
   let location = useLocation();
 
@@ -49,6 +50,9 @@ const Signup = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        profileUpdate(name).then((result) => {
+          console.log("profile updated");
+        });
         console.log(user);
         toast.success("user created successfully");
         form.reset();

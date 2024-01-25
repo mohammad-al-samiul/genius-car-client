@@ -5,6 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 
 const Booking = () => {
   const { user } = useContext(AuthContext);
+
   const service = useLoaderData();
   const { _id, title, price, img } = service;
 
@@ -23,7 +24,7 @@ const Booking = () => {
       img,
       price,
       date,
-      status : false,
+      status: false,
       description: message,
     };
     //console.log(order);
@@ -36,6 +37,7 @@ const Booking = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.insertedId) {
           form.reset();
           toast.success("Order Confirmed! ");
@@ -48,7 +50,6 @@ const Booking = () => {
 
   return (
     <div className="bg-base-200 p-20 rounded-lg mt-10">
-      
       <form onSubmit={handleBooking} className="card-body space-y-3 ">
         <div className="grid grid-cols-2 gap-4">
           <div className="form-control">
@@ -57,6 +58,7 @@ const Booking = () => {
               name="name"
               placeholder="Enter your Name"
               className="input"
+              defaultValue={user?.displayName}
               required
             />
           </div>
@@ -66,6 +68,7 @@ const Booking = () => {
               id="birthdaytime"
               className="input"
               name="date"
+              defaultValue={new Date().toJSON().slice(0, 10)}
             />
           </div>
         </div>
@@ -85,6 +88,7 @@ const Booking = () => {
               placeholder="Your Email"
               name="email"
               className="input"
+              defaultValue={user?.email}
               required
             />
           </div>

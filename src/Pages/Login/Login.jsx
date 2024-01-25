@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import loginImage from "../../assets/images/login/login";
 const Login = () => {
-  const {signInUser,googleSignIn, githubSignIn} = useContext(AuthContext);
+  const { signInUser, googleSignIn, githubSignIn } = useContext(AuthContext);
   let navigate = useNavigate();
   let location = useLocation();
 
@@ -15,9 +15,23 @@ const Login = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        toast.success("successfully created user");
-        navigate(from, { replace: true });
+        const loggedUser = {
+          email: user?.email,
+        };
+        fetch(`http://localhost:8000/api/user/login`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("access-token", data.accessToken);
+            toast.success("successfully created user");
+            navigate(from, { replace: true });
+          });
       })
       .catch((err) => {
         console.error(err.message);
@@ -28,9 +42,23 @@ const Login = () => {
     githubSignIn()
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        toast.success("successfully created user");
-        navigate(from, { replace: true });
+        const loggedUser = {
+          email: user?.email,
+        };
+        fetch(`http://localhost:8000/api/user/login`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("access-token", data.accessToken);
+            toast.success("successfully created user");
+            navigate(from, { replace: true });
+          });
       })
       .catch((err) => {
         console.log(err.message);
@@ -46,10 +74,24 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        toast.success("user created successfully");
-        form.reset();
-        navigate(from, { replace: true });
+        const loggedUser = {
+          email: user?.email,
+        };
+        fetch(`http://localhost:8000/api/user/login`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(loggedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("access-token", data.accessToken);
+            form.reset();
+            toast.success("successfully created user");
+            navigate(from, { replace: true });
+          });
       })
       .catch((err) => {
         console.error(err.message);

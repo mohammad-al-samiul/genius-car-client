@@ -72,7 +72,7 @@ const Order = () => {
                 (booking) => booking._id !== id
               );
               const approved = bookings.find((booking) => booking._id === id);
-              const newBooking = [approved, ...remaining];
+              const newBooking = [ ...remaining,approved];
               setBookings(newBooking);
             }
           });

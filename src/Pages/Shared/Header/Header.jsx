@@ -7,6 +7,7 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const handleLogout = () => {
     logOut().then(() => {
+      localStorage.removeItem("access-token");
       toast.success("log out successful");
       <Navigate to={"/home"} />;
     });
