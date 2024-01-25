@@ -51,12 +51,27 @@ const Signup = () => {
       .then((result) => {
         const user = result.user;
         profileUpdate(name).then((result) => {
-          console.log("profile updated");
+          const userInfo = {
+            email: user?.email,
+            displayName: user?.displayName,
+            password,
+          };
+          fetch(`http://localhost:8000/api/user/register`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userInfo),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              toast.success("user created successfully");
+              form.reset();
+              navigate(from, { replace: true });
+            })
+            .catch((err) => console.log(err.message));
+          //console.log(user);
         });
-        console.log(user);
-        toast.success("user created successfully");
-        form.reset();
-        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.error(err.message);
