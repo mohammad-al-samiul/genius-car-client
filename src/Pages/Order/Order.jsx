@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -5,15 +6,29 @@ import OrderRow from "./OrderRow/OrderRow";
 
 const Order = () => {
   const [bookings, setBookings] = useState([]);
-  const { user } = useContext(AuthContext);
-
+  const { user, loading } = useContext(AuthContext);
+  const token = localStorage.getItem("access-token");
+ 
+  
   useEffect(() => {
-    fetch(`http://localhost:8000/api/bookings?email=${user?.email}`)
+    if(loading){
+      return ;
+    }
+    fetch(`http://localhost:8000/api/bookings?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         setBookings(data);
       });
-  }, [user?.email, bookings]);
+  }, [user?.email]);
+  //console.log(bookings);
+  
+  if (!Array.isArray(bookings) || bookings.length === 0) {
+    return <div>...loading</div>;
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -72,7 +87,7 @@ const Order = () => {
                 (booking) => booking._id !== id
               );
               const approved = bookings.find((booking) => booking._id === id);
-              const newBooking = [ ...remaining,approved];
+              const newBooking = [...remaining, approved];
               setBookings(newBooking);
             }
           });

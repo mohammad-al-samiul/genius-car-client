@@ -7,13 +7,15 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const Booking = () => {
   const { user } = useContext(AuthContext);
   const [loggedUser, isUserLoading] = useLoggedInUser();
+  const token = localStorage.getItem("access-token");
+  //console.log(token);
   
   const service = useLoaderData();
   const { _id, title, price, img } = service;
   if (isUserLoading) {
     return <div>loading</div>;
   }
-  console.log(loggedUser);
+  //console.log(loggedUser);
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ const Booking = () => {
     const email = user?.email ? user?.email : form.email.value;
     const message = form.message.value;
     const order = {
+      user_id : loggedUser?._id,
       user_name: name,
       service_id: _id,
       service_name: title,
@@ -38,12 +41,13 @@ const Booking = () => {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        authorization :  `Bearer ${token}`
       },
       body: JSON.stringify(order),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         if (data.insertedId) {
           form.reset();
           toast.success("Order Confirmed! ");
