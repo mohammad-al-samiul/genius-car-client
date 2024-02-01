@@ -1,18 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import Spinner from "../../Components/Spinner/Spinner";
 import { AuthContext } from "../../Provider/AuthProvider";
 import OrderRow from "./OrderRow/OrderRow";
 
 const Order = () => {
   const [bookings, setBookings] = useState([]);
+  const [refresh, setRefresh] = useState(true);
   const { user, loading } = useContext(AuthContext);
   const token = localStorage.getItem("access-token");
- 
-  
+
   useEffect(() => {
-    if(loading){
-      return ;
+    if (loading) {
+      return;
     }
     fetch(`http://localhost:8000/api/bookings?email=${user?.email}`, {
       headers: {
@@ -23,11 +23,11 @@ const Order = () => {
       .then((data) => {
         setBookings(data);
       });
-  }, [user?.email]);
+  }, [user?.email, token, loading, refresh]);
   //console.log(bookings);
-  
+
   if (!Array.isArray(bookings) || bookings.length === 0) {
-    return <div>...loading</div>;
+    return <Spinner />;
   }
 
   const handleDelete = (id) => {
@@ -43,6 +43,9 @@ const Order = () => {
       if (result.isConfirmed) {
         fetch(`http://localhost:8000/api/bookings/${id}`, {
           method: "DELETE",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
         })
           .then((res) => res.json())
           .then((data) => {
@@ -76,12 +79,13 @@ const Order = () => {
           method: "PATCH",
           headers: {
             "Content-type": "application/json",
+            authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ status: true }),
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            //console.log(data);
             if (data.success) {
               const remaining = bookings.filter(
                 (booking) => booking._id !== id
@@ -89,6 +93,7 @@ const Order = () => {
               const approved = bookings.find((booking) => booking._id === id);
               const newBooking = [...remaining, approved];
               setBookings(newBooking);
+              setRefresh(!refresh);
             }
           });
         Swal.fire({

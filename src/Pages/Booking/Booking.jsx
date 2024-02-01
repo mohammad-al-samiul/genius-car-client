@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import Spinner from "../../Components/Spinner/Spinner";
 import useLoggedInUser from "../../Hooks/useLoggedInUser";
 import { AuthContext } from "../../Provider/AuthProvider";
 
@@ -13,10 +14,9 @@ const Booking = () => {
   const service = useLoaderData();
   const { _id, title, price, img } = service;
   if (isUserLoading) {
-    return <div>loading</div>;
+    return <Spinner/> ;
   }
-  //console.log(loggedUser);
-
+  
   const handleBooking = (e) => {
     e.preventDefault();
     const form = e.target;

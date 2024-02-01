@@ -43,12 +43,7 @@ const OrderRow = ({ booking, handleUpdate, handleDelete }) => {
       <th>
         {status ? (
           <>
-            <button
-              
-              onClick={() => handleUpdate(_id)}
-              className="btn bg-green-400 text-white btn-sm"
-              disabled
-            >
+            <button className="btn bg-green-400 text-white btn-sm" disabled>
               Approved
             </button>
           </>
