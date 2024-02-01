@@ -76,6 +76,7 @@ const Login = () => {
         const user = result.user;
         const loggedUser = {
           email: user?.email,
+          password: password,
         };
         fetch(`http://localhost:8000/api/user/login`, {
           method: "POST",
@@ -86,7 +87,7 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             localStorage.setItem("access-token", data.accessToken);
             form.reset();
             toast.success("successfully created user");

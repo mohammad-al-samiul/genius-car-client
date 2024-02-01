@@ -1,13 +1,19 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import useLoggedInUser from "../../Hooks/useLoggedInUser";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Booking = () => {
   const { user } = useContext(AuthContext);
-
+  const [loggedUser, isUserLoading] = useLoggedInUser();
+  
   const service = useLoaderData();
   const { _id, title, price, img } = service;
+  if (isUserLoading) {
+    return <div>loading</div>;
+  }
+  console.log(loggedUser);
 
   const handleBooking = (e) => {
     e.preventDefault();
