@@ -14,7 +14,7 @@ const Order = () => {
     if (loading) {
       return;
     }
-    fetch(`http://localhost:8000/api/bookings?email=${user?.email}`, {
+    fetch(`https://genius-car-server-iota-ochre.vercel.app/api/bookings?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -41,7 +41,7 @@ const Order = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:8000/api/bookings/${id}`, {
+        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/bookings/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ const Order = () => {
       confirmButtonText: "Yes, approve it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:8000/api/bookings/${id}`, {
+        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/bookings/${id}`, {
           method: "PATCH",
           headers: {
             "Content-type": "application/json",

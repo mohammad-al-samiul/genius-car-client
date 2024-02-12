@@ -56,7 +56,7 @@ const Signup = () => {
             displayName: user?.displayName,
             password,
           };
-          fetch(`http://localhost:8000/api/user/register`, {
+          fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/register`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -37,7 +37,7 @@ const Booking = () => {
       description: message,
     };
     //console.log(order);
-    fetch(`http://localhost:8000/api/bookings`, {
+    fetch(`https://genius-car-server-iota-ochre.vercel.app/api/bookings`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

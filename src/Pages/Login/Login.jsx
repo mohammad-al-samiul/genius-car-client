@@ -18,7 +18,7 @@ const Login = () => {
         const loggedUser = {
           email: user?.email,
         };
-        fetch(`http://localhost:8000/api/user/login`, {
+        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/login`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -45,7 +45,7 @@ const Login = () => {
         const loggedUser = {
           email: user?.email,
         };
-        fetch(`http://localhost:8000/api/user/login`, {
+        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/login`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -78,7 +78,7 @@ const Login = () => {
           email: user?.email,
           password: password,
         };
-        fetch(`http://localhost:8000/api/user/login`, {
+        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/login`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

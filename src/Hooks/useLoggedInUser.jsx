@@ -9,7 +9,7 @@ const useLoggedInUser = () => {
     queryKey: ["current", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/api/user/current`, {
+      const res = await fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/current`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

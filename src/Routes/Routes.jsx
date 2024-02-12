@@ -52,7 +52,7 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/api/services/${params.id}`),
+          fetch(`https://genius-car-server-iota-ochre.vercel.app/api/services/${params.id}`),
       },
       {
         path: "/contact",

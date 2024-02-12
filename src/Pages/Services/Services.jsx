@@ -12,7 +12,7 @@ const Services = () => {
   } = useQuery({
     queryKey: ["services"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8000/api/services`);
+      const res = await fetch(`https://genius-car-server-iota-ochre.vercel.app/api/services`);
       const data = res.json();
       return data;
     },
