@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const useLoggedInUser = () => {
   const { loading, user } = useContext(AuthContext);
   const token = localStorage.getItem("access-token");
+  //console.log(token);
   const { data: loggedUser, isLoading: isUserLoading } = useQuery({
     queryKey: ["current", user?.email],
     enabled: !loading,

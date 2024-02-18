@@ -65,8 +65,10 @@ const Signup = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              toast.success("user created successfully");
+              //console.log(data);
+              localStorage.setItem("access-token", data.accessToken);
               form.reset();
+              toast.success("successfully created user");
               navigate(from, { replace: true });
             })
             .catch((err) => console.log(err.message));

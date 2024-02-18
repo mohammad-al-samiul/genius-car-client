@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import Spinner from "../../Components/Spinner/Spinner";
 import { AuthContext } from "../../Provider/AuthProvider";
 import OrderRow from "./OrderRow/OrderRow";
 
@@ -27,7 +26,13 @@ const Order = () => {
   //console.log(bookings);
 
   if (!Array.isArray(bookings) || bookings.length === 0) {
-    return <Spinner />;
+    return (
+      <div>
+        <h2 className="text-center font-bold text-2xl">
+          You have no order. Please Order Now
+        </h2>
+      </div>
+    );
   }
 
   const handleDelete = (id) => {

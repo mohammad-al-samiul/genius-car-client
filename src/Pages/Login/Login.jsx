@@ -8,7 +8,6 @@ const Login = () => {
   const { signInUser, googleSignIn, githubSignIn } = useContext(AuthContext);
   let navigate = useNavigate();
   let location = useLocation();
-
   let from = location.state?.from?.pathname || "/";
 
   const handleGoogleLogin = () => {
@@ -18,13 +17,16 @@ const Login = () => {
         const loggedUser = {
           email: user?.email,
         };
-        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/login`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
+        fetch(
+          `https://genius-car-server-iota-ochre.vercel.app/api/user/login`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(loggedUser),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -45,13 +47,16 @@ const Login = () => {
         const loggedUser = {
           email: user?.email,
         };
-        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/login`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
+        fetch(
+          `https://genius-car-server-iota-ochre.vercel.app/api/user/login`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(loggedUser),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -78,16 +83,20 @@ const Login = () => {
           email: user?.email,
           password: password,
         };
-        fetch(`https://genius-car-server-iota-ochre.vercel.app/api/user/login`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(loggedUser),
-        })
+        console.log(loggedUser);
+        fetch(
+          `https://genius-car-server-iota-ochre.vercel.app/api/user/login`,
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(loggedUser),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
-            // console.log(data);
+           console.log(data);
             localStorage.setItem("access-token", data.accessToken);
             form.reset();
             toast.success("successfully created user");
