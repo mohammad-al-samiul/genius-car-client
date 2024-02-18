@@ -1,6 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/no-unknown-property */
+import { useForm, ValidationError } from "@formspree/react";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 const Contact = () => {
+  const [state, handleSubmit] = useForm("xbjvlqkk");
+  useEffect(() => {
+    if (state.succeeded) {
+      toast.success("Thanks for messaging");
+      
+    }
+  }, [state.succeeded]);
   return (
     <div className="container my-12 mx-auto px-2 md:px-4">
       <section className="mb-32">
@@ -9,9 +19,11 @@ const Contact = () => {
             <h2 className="mb-12 px-6 text-3xl font-bold">Contact us</h2>
           </div>
         </div>
-
         <div className="flex flex-wrap">
-          <form className="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
+          <form
+            onSubmit={handleSubmit}
+            className="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6"
+          >
             <div className="mb-3 w-full">
               <label
                 className="block font-medium mb-[2px] text-gray-600"
@@ -35,10 +47,16 @@ const Contact = () => {
                 Email
               </label>
               <input
+                id="email"
                 type="email"
+                name="email"
                 className="px-2 py-2 border w-full outline-none rounded-md"
-                id="exampleInput90"
                 placeholder="Enter your email address"
+              />
+              <ValidationError
+                prefix="Email"
+                field="email"
+                errors={state.errors}
               />
             </div>
 
@@ -51,9 +69,14 @@ const Contact = () => {
               </label>
               <textarea
                 className="px-2 py-2 border rounded-[5px] w-full outline-none"
-                name=""
-                id=""
+                id="message"
+                name="message"
               ></textarea>
+              <ValidationError
+                prefix="Message"
+                field="message"
+                errors={state.errors}
+              />
             </div>
 
             {/* <button
@@ -64,6 +87,7 @@ const Contact = () => {
             </button> */}
             <div className="form-control">
               <input
+                disabled={state.submitting}
                 className="btn btn-error ! hover:text-white text-white"
                 type="submit"
                 value="SEND"
